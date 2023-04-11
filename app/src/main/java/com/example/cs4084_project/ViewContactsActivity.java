@@ -38,8 +38,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ViewContactsActivity extends AppCompatActivity {
-
-//    RecyclerView contact_list;
     ListView contact_list;
     FirebaseFirestore db;
     DocumentReference doc;
