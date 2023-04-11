@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserDetailsActivity"
+    android:background="@color/background"
+    android:padding="50dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit User Details"
+        android:fontFamily="@font/slab"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        />
+
+    <EditText
+        android:id="@+id/user_details_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/slab"
+        />
+
+    <EditText
+        android:id="@+id/user_details_dob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:hint="DD/MM/YYYY"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/slab"
+
+        />
+
+    <EditText
+        android:id="@+id/user_details_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Height"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/slab"
+        />
+
+    <EditText
+        android:id="@+id/user_details_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Weight"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/slab"
+        />
+
+    <EditText
+        android:id="@+id/user_details_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="Phone Number"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/slab"
+        />
+
+    <RelativeLayout
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/user_details_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/user_details_submit"
+            android:layout_marginBottom="10dp"
+            />
+
+        <Button
+            android:id="@+id/user_details_submit"
+            android:layout_above="@+id/user_details_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:backgroundTint="@color/button"
+            android:fontFamily="@font/slab"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/user_details_cancel"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/slab"
+            android:text="Return"
+            android:backgroundTint="@color/button"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+    </RelativeLayout>
+</LinearLayout>

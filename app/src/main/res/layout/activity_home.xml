@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".HomeActivity"
+    android:background="@color/background"
+    android:padding="30dp"
+    >
+
+    <ImageButton
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/profile"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/transparent"
+        android:tooltipText="Profile"
+        android:id="@+id/user_details_btn"
+        ></ImageButton>
+
+    <Button
+        android:id="@+id/campus_maps_btn"
+        android:layout_width="250dp"
+        android:layout_height="75dp"
+        android:text="Help Stations"
+        android:textStyle="bold"
+        android:backgroundTint="@color/button"
+        android:fontFamily="@font/slab"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentRight="true"
+        android:textSize="20dp"
+        />
+
+
+
+    <Button
+        android:id="@+id/yellow_alert_btn"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:textSize="20dp"
+        android:text="Yellow Alert"
+        android:textStyle="bold"
+        android:backgroundTint="@color/yellowbtn"
+        android:fontFamily="@font/slab"
+        android:textColor="@color/black"
+        android:layout_marginBottom="18dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/campus_maps_btn"
+        />
+
+    <Button
+        android:id="@+id/orange_alert_btn"
+        android:layout_width="160dp"
+        android:layout_height="90dp"
+        android:textSize="20dp"
+        android:text="Orange Alert"
+        android:layout_alignParentRight="true"
+        android:textStyle="bold"
+        android:backgroundTint="@color/orangebtn"
+        android:fontFamily="@font/slab"
+        android:textColor="@color/black"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/campus_maps_btn"
+        />
+
+    <Button
+        android:id="@+id/red_alert_btn"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Red Alert"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/redbtn"
+        android:fontFamily="@font/slab"
+        android:textColor="@color/black"
+        android:layout_marginBottom="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/yellow_alert_btn"
+
+        />
+
+    <Button
+        android:id="@+id/add_contacts_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_contact"
+        android:backgroundTint="@color/button"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/slab"
+        android:layout_below="@+id/red_alert_btn"
+        android:textSize="20dp"
+        />
+
+    <Button
+        android:id="@+id/view_contacts_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Contacts"
+        android:backgroundTint="@color/button"
+        android:textStyle="bold"
+        android:fontFamily="@font/slab"
+        android:layout_below="@+id/add_contacts_btn"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        />
+
+    <Button
+        android:id="@+id/safety_tips_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Safety Tips"
+        android:textStyle="bold"
+        android:backgroundTint="@color/button"
+        android:fontFamily="@font/slab"
+        android:layout_below="@+id/view_contacts_btn"
+        android:layout_marginBottom="40dp"
+        android:textSize="20dp"
+        />
+
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:textStyle="bold"
+        android:backgroundTint="@color/button"
+        android:fontFamily="@font/slab"
+        android:layout_below="@+id/safety_tips_btn"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        />
+
+</RelativeLayout>
