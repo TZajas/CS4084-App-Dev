@@ -157,7 +157,7 @@ public class SendMessageActivity extends AppCompatActivity {
                         double latitude = location.getLatitude();
                         double longitude = location.getLongitude();
                         Log.d(TAG, "Latitude: " + latitude + ", Longitude: " + longitude);
-                        user_location = "My Location: " + "https://www.google.com/maps/place/@"+longitude+","+latitude;
+                        user_location = "My Location: " + "https://www.google.com/maps/search/?api=1&query="+latitude+"%2C"+longitude;
                     } else {
                         Log.e(TAG, "Location is null");
                     }
@@ -237,6 +237,15 @@ public class SendMessageActivity extends AppCompatActivity {
                 Toast.makeText(this, "Error, message did not send", Toast.LENGTH_LONG).show();
             }
         }
+
+//            try {
+//                SmsManager smsManager = SmsManager.getDefault();
+//                smsManager.sendTextMessage("0892369049", null, alert_message, null, null);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                Toast.makeText(this, "Error, message did not send", Toast.LENGTH_LONG).show();
+//            }
+
     }
 
     public void customiseMessage() {
