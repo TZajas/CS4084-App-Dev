@@ -16,4 +16,10 @@
     <string name="logout">Logout</string>
     <string name="add_contact">Add Contact</string>
     <string name="edit_contacts">Edit Contacts</string>
+
+    <string name="safety_tips">1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum semper lacus, vitae faucibus eros venenatis vel. Morbi nec rutrum erat. Nulla maximus, felis id ultricies convallis, leo orci fermentum lacus, eget laoreet sapien augue non mauris.
+
+2. Ut ac scelerisque enim. Ut vel tortor dui. Curabitur eget ligula arcu. Phasellus mollis metus nec nulla volutpat, vitae maximus augue feugiat. Morbi in dui at justo pellentesque mattis. Sed varius non nisi nec luctus. Quisque finibus eu leo ac ullamcorper. Phasellus congue placerat ex at varius.
+
+3. Aenean ex turpis, ullamcorper nec lectus sit amet, hendrerit viverra mi. Nunc varius quam urna, nec tempor elit rutrum eu. Etiam tristique justo ut massa dapibus dignissim. Suspendisse sit amet massa nulla. Nulla facilisi. Sed mollis mi quis dignissim aliquet. Donec id odio nunc. Cras vel lorem mi. Duis mi nulla, luctus a diam eget, fermentum fringilla lectus.</string>
 </resources>

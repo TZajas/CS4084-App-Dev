@@ -2,11 +2,13 @@ package com.example.cs4084_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,32 +22,36 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class UserDetailsActivity extends AppCompatActivity {
 
+    final private Calendar myCalendar= Calendar.getInstance();
     private EditText name,height,weight,dob,phone;
     private Button save_btn;
     private Button cancel_btn;
 
     private ListView user_details_list;
 
-    ArrayList<String> arrayList;
+    private ArrayList<String> arrayList;
 
-    ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> adapter;
 
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
 
-    FirebaseUser user;
+    private FirebaseUser user;
 
-    FirebaseFirestore db;
+    private FirebaseFirestore db;
 
-    DocumentReference doc;
+    private DocumentReference doc;
 
-    CollectionReference userDetails;
+    private CollectionReference userDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,22 @@ public class UserDetailsActivity extends AppCompatActivity {
         arrayList = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_modify_layout, arrayList);
         user_details_list.setAdapter(adapter);
+
+        DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH,month);
+                myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                updateLabel();
+            }
+        };
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(UserDetailsActivity.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         doc.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -147,5 +169,11 @@ public class UserDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void updateLabel() {
+        String myFormat="dd/MM/yyyy";
+        SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.UK);
+        dob.setText(dateFormat.format(myCalendar.getTime()));
     }
 }

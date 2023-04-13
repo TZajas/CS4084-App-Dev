@@ -56,7 +56,7 @@ public class ViewContactsActivity extends AppCompatActivity {
 
     Button delete_contact_btn;
 
-    TextView select_contact_textview;
+    TextView select_contact_textview, no_contacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +80,8 @@ public class ViewContactsActivity extends AppCompatActivity {
 
         contact_list.setAdapter(adapter);
 
+        no_contacts = findViewById(R.id.no_contacts);
+
         db = FirebaseFirestore.getInstance();
         doc = db.collection("userContacts").document(user.getEmail());
 
@@ -89,6 +91,10 @@ public class ViewContactsActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if(documentSnapshot.exists()){
                             Map<String, Object> numbers = documentSnapshot.getData();
+
+                            if(numbers.isEmpty()){
+                                no_contacts.setVisibility(View.VISIBLE);
+                            }
 
                             for (Map.Entry<String, Object> entry: numbers.entrySet()) {
                                 String key = entry.getKey();
@@ -115,7 +121,12 @@ public class ViewContactsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String contact = adapterView.getItemAtPosition(i).toString();
                 String[] split = contact.split(" ");
-                selected_name = split[0];
+
+                if(split.length > 2){
+                    selected_name = split[0] + " " + split[1];
+                }else{
+                    selected_name = split[0];
+                }
                 delete_contact_btn.setText("Delete " + selected_name);
                 delete_contact_btn.setVisibility(View.VISIBLE);
                 select_contact_textview.setVisibility(View.GONE);
@@ -137,6 +148,7 @@ public class ViewContactsActivity extends AppCompatActivity {
 
                 Map<String,Object> updates = new HashMap<>();
                 updates.put(selected_name, FieldValue.delete());
+                Toast.makeText(ViewContactsActivity.this, "Deleted: " + selected_name, Toast.LENGTH_SHORT).show();
                 doc.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

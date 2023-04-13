@@ -19,11 +19,17 @@
         android:theme="@style/Theme.CS4084Project"
         tools:targetApi="31">
         <activity
+            android:name=".SafetyTipsActivity"
+            android:exported="false"
+            android:label="Safety Tips"/>
+        <activity
             android:name=".CustomiseMessageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Customise Message"/>
         <activity
             android:name=".MapsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Campus Map"/>
         <activity
             android:name=".UserDetailsActivity"
             android:exported="false"

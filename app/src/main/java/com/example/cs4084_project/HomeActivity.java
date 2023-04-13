@@ -22,23 +22,11 @@ import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
 
-    Button yellowAlert;
-    Button orangeAlert;
-    Button redAlert;
-    Button addContact;
-    Button viewContacts;
-
-    Button customiseMessage;
-
-    Button maps;
-
+    Button yellowAlert, orangeAlert, redAlert, addContact, viewContacts, customiseMessage, maps, logoutButton, safetyTips;
     ImageButton userDetails;
     FirebaseAuth auth;
-    Button logoutButton;
     FirebaseUser user;
     FirebaseFirestore db;
-
-    HashMap<String, String> alert_messages;
 
     String[] permissions= new String[] {
             Manifest.permission.SEND_SMS,
@@ -74,13 +62,11 @@ public class HomeActivity extends AppCompatActivity {
 
         customiseMessage = findViewById(R.id.customise_message_btn);
 
-        alert_messages = new HashMap<String, String>();
+        safetyTips = findViewById(R.id.safety_tips_btn);
 
         auth = FirebaseAuth.getInstance();
 
         user = auth.getCurrentUser();
-
-        Intent alert_msg_intent = getIntent();
 
         if(user==null){
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -88,15 +74,14 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         }
 
-        Bundle extras = alert_msg_intent.getExtras();
-
-        if(extras!=null){
-            if(extras.containsKey("alert_messages")){
-                alert_messages = (HashMap<String, String>) alert_msg_intent.getSerializableExtra("alert_messages");
-                Toast.makeText(this, alert_messages.get("yellow"), Toast.LENGTH_SHORT).show();
+        safetyTips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SafetyTipsActivity.class);
+                startActivity(intent);
+                finish();
             }
-        }
-
+        });
 
         customiseMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,9 +143,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SendMessageActivity.class);
-                if(!alert_messages.isEmpty()){
-                    intent.putExtra("alert_messages", alert_messages);
-                }
                 intent.putExtra("alert", "Yellow");
                 startActivity(intent);
                 finish();
@@ -171,9 +153,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SendMessageActivity.class);
-                if(!alert_messages.isEmpty()){
-                    intent.putExtra("alert_messages", alert_messages);
-                }
                 intent.putExtra("alert", "Orange");
                 startActivity(intent);
                 finish();
@@ -184,9 +163,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SendMessageActivity.class);
-                if(!alert_messages.isEmpty()){
-                    intent.putExtra("alert_messages", alert_messages);
-                }
                 intent.putExtra("alert", "Red");
                 startActivity(intent);
                 finish();

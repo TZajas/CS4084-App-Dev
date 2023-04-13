@@ -20,6 +20,19 @@
         android:textSize="25dp"
         ></TextView>
 
+    <TextView
+        android:id="@+id/no_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:fontFamily="@font/slab"
+        android:textStyle="bold"
+        android:text="No Contacts Added, Please Add Contacts"
+        android:layout_marginBottom="20dp"
+        android:textSize="20dp"
+        android:visibility="gone"
+        ></TextView>
+
     <ListView
         android:layout_below="@+id/title"
         android:id="@+id/contact_list"

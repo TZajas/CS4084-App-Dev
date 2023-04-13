@@ -8,6 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,17 +23,28 @@ import java.util.Map;
 public class CustomiseMessageActivity extends AppCompatActivity {
 
     Button red_btn, yellow_btn, orange_btn, save_exit_btn;
-
-    String red_msg, yellow_msg, orange_msg;
-
-    HashMap<String, String> alert_messages;
+    Map<String, String> alert_messages;
 
     EditText red_edit, orange_edit, yellow_edit;
+
+    FirebaseFirestore db;
+
+    DocumentReference doc;
+
+    FirebaseAuth auth;
+
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customise_message);
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
+        db = FirebaseFirestore.getInstance();
+        doc = db.collection("customAlerts").document(user.getEmail());
 
         alert_messages = new HashMap<>();
 
@@ -76,12 +94,11 @@ public class CustomiseMessageActivity extends AppCompatActivity {
                     alert_messages.put("red", red_edit.getText().toString());
                 }
 
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-
                 if(!alert_messages.isEmpty()){
-                    intent.putExtra("alert_messages", alert_messages);
+                    doc.set(alert_messages, SetOptions.merge());
                 }
 
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
                 finish();
             }

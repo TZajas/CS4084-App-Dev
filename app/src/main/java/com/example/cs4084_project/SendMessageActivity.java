@@ -30,6 +30,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,19 +39,14 @@ public class SendMessageActivity extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
     private static final String TAG = "MainActivity";
-
-    private HashMap<String, String> alert_messages;
-
     String red_msg, orange_msg, yellow_msg, alert_colour, alert_message, user_location;
-
     private Button cancelAlertBtn;
     private TextView timer;
     private TextView countdownMessage;
     private CountDownTimer countDownTimer;
-
     private FirebaseFirestore db;
     private DocumentReference doc;
-
+    private DocumentReference custom_message_doc;
     private FirebaseAuth auth;
     private FirebaseUser user;
     private ArrayList<String> contacts;
@@ -63,33 +59,24 @@ public class SendMessageActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         alert_colour = extras.getString("alert");
 
-        alert_messages = new HashMap<String, String>();
-
         red_msg = "RED ALERT";
         orange_msg = "ORANGE ALERT";
         yellow_msg = "YELLOW ALERT";
-
-        if(extras.containsKey("alert_messages")){
-            alert_messages = (HashMap<String, String>) extras.getSerializable("alert_messages");
-        }
-
-        if(!alert_messages.isEmpty()){
-            customiseMessage();
-            Toast.makeText(this, yellow_msg, Toast.LENGTH_SHORT).show();
-        }
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
 
         db = FirebaseFirestore.getInstance();
         doc = db.collection("userContacts").document(user.getEmail());
+        custom_message_doc = db.collection("customAlerts").document(user.getEmail());
+
+        customiseMessage();
 
         contacts = getContacts();
 
         timer = findViewById(R.id.timer);
         countdownMessage = findViewById(R.id.countdown_message);
-        String message = alert_colour + " Alert Sending In:";
-        countdownMessage.setText(message);
+        countdownMessage.setText(alert_colour + " Alert Sending In:");
 
         cancelAlertBtn = findViewById(R.id.cancel_alert_btn);
 
@@ -139,6 +126,62 @@ public class SendMessageActivity extends AppCompatActivity {
         finish();
     }
 
+
+    public void sendMessage(ArrayList<String> contacts) {
+
+        if (alert_colour.equals("Red")) {
+            alert_message = red_msg;
+        } else if (alert_colour.equals("Orange")) {
+            alert_message = orange_msg;
+        } else {
+            alert_message = yellow_msg;
+        }
+
+        alert_message = alert_message + " " + user_location;
+
+        countdownMessage.setText(alert_colour + " Alert Sent!");
+
+        Toast.makeText(this, alert_message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Alert Sent to Contacts", Toast.LENGTH_SHORT).show();
+        for (String num : contacts) {
+            try {
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(num, null, alert_message, null, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Error, message did not send", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void customiseMessage() {
+        custom_message_doc.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(documentSnapshot.exists()){
+                            Map<String, Object> details = documentSnapshot.getData();
+
+                            for (Map.Entry<String, Object> entry: details.entrySet()) {
+                                String key = entry.getKey();
+                                String value = entry.getValue().toString();
+                                if (key.equals("yellow") && value!="")  yellow_msg = value;
+                                if (key.equals("orange") && value!="") orange_msg = value;
+                                if (key.equals("red") && value!="") red_msg = value;
+                            }
+
+                        } else {
+                            Toast.makeText(SendMessageActivity.this, "No Custom Message", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SendMessageActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     private void requestLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_LOCATION);
@@ -157,7 +200,7 @@ public class SendMessageActivity extends AppCompatActivity {
                         double latitude = location.getLatitude();
                         double longitude = location.getLongitude();
                         Log.d(TAG, "Latitude: " + latitude + ", Longitude: " + longitude);
-                        user_location = "My Location: " + "https://www.google.com/maps/search/?api=1&query="+latitude+"%2C"+longitude;
+                        user_location = "https://www.google.com/maps/search/?api=1&query=" + latitude + "%2C" + longitude;
                     } else {
                         Log.e(TAG, "Location is null");
                     }
@@ -194,9 +237,14 @@ public class SendMessageActivity extends AppCompatActivity {
                         if (documentSnapshot.exists()) {
                             Map<String, Object> numbers = documentSnapshot.getData();
 
-                            for (Map.Entry<String, Object> entry : numbers.entrySet()) {
-                                String value = entry.getValue().toString();
-                                result.add(value);
+                            if(numbers.isEmpty()){
+                                Toast.makeText(SendMessageActivity.this, "No Contacts Added", Toast.LENGTH_LONG).show();
+                                cancelAlert();
+                            }else{
+                                for (Map.Entry<String, Object> entry : numbers.entrySet()) {
+                                    String value = entry.getValue().toString();
+                                    result.add(value);
+                                }
                             }
                         } else {
                             Toast.makeText(SendMessageActivity.this, "No Contacts Added", Toast.LENGTH_SHORT).show();
@@ -210,51 +258,5 @@ public class SendMessageActivity extends AppCompatActivity {
                     }
                 });
         return result;
-    }
-
-    public void sendMessage(ArrayList<String> contacts) {
-        if (alert_colour.equals("Red")) {
-            alert_message = red_msg;
-        } else if (alert_colour.equals("Orange")) {
-            alert_message = orange_msg;
-        } else {
-            alert_message = yellow_msg;
-        }
-
-        alert_message = alert_message + " " + user_location;
-
-
-
-        countdownMessage.setText(alert_colour + " Alert Sent!");
-
-        Toast.makeText(this, alert_message, Toast.LENGTH_SHORT).show();
-        for (String num : contacts) {
-            try {
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(num, null, alert_message, null, null);
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Error, message did not send", Toast.LENGTH_LONG).show();
-            }
-        }
-
-//            try {
-//                SmsManager smsManager = SmsManager.getDefault();
-//                smsManager.sendTextMessage("0892369049", null, alert_message, null, null);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                Toast.makeText(this, "Error, message did not send", Toast.LENGTH_LONG).show();
-//            }
-
-    }
-
-    public void customiseMessage() {
-        for (Map.Entry<String, String> entry : alert_messages.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            if (key.equals("yellow")) yellow_msg = value;
-            if (key.equals("orange")) orange_msg = value;
-            if (key.equals("red")) red_msg = value;
-        }
     }
 }

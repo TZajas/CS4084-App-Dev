@@ -130,7 +130,7 @@
         android:backgroundTint="@color/button"
         android:fontFamily="@font/slab"
         android:layout_below="@+id/customise_message_btn"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="30dp"
         android:textSize="20dp"
         />
 
