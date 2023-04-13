@@ -29,7 +29,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/button"
-            android:text="Add Contact"/>
+            android:text="Add Contact"
+            android:fontFamily="@font/slab"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
 
         <TextView
             android:id="@+id/cancel_button"
@@ -39,7 +43,7 @@
             android:fontFamily="@font/slab"
             android:textSize="25dp"
             android:gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             />
 
 

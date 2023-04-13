@@ -109,6 +109,19 @@
         />
 
     <Button
+        android:id="@+id/customise_message_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customise Message"
+        android:textStyle="bold"
+        android:backgroundTint="@color/button"
+        android:fontFamily="@font/slab"
+        android:layout_below="@+id/view_contacts_btn"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        />
+
+    <Button
         android:id="@+id/safety_tips_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,8 +129,8 @@
         android:textStyle="bold"
         android:backgroundTint="@color/button"
         android:fontFamily="@font/slab"
-        android:layout_below="@+id/view_contacts_btn"
-        android:layout_marginBottom="40dp"
+        android:layout_below="@+id/customise_message_btn"
+        android:layout_marginBottom="35dp"
         android:textSize="20dp"
         />
 
@@ -131,7 +144,6 @@
         android:backgroundTint="@color/button"
         android:fontFamily="@font/slab"
         android:layout_below="@+id/safety_tips_btn"
-        android:layout_marginBottom="10dp"
         android:textSize="20dp"
         />
 

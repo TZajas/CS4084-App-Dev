@@ -146,6 +146,5 @@ public class ViewContactsActivity extends AppCompatActivity {
                 });
             }
         });
-
     }
 }

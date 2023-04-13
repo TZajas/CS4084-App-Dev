@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+
 public class HomeActivity extends AppCompatActivity {
 
     Button yellowAlert;
@@ -26,6 +28,8 @@ public class HomeActivity extends AppCompatActivity {
     Button addContact;
     Button viewContacts;
 
+    Button customiseMessage;
+
     Button maps;
 
     ImageButton userDetails;
@@ -33,6 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     Button logoutButton;
     FirebaseUser user;
     FirebaseFirestore db;
+
+    HashMap<String, String> alert_messages;
 
     String[] permissions= new String[] {
             Manifest.permission.SEND_SMS,
@@ -66,15 +72,40 @@ public class HomeActivity extends AppCompatActivity {
 
         userDetails = findViewById(R.id.user_details_btn);
 
+        customiseMessage = findViewById(R.id.customise_message_btn);
+
+        alert_messages = new HashMap<String, String>();
+
         auth = FirebaseAuth.getInstance();
 
         user = auth.getCurrentUser();
+
+        Intent alert_msg_intent = getIntent();
 
         if(user==null){
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
         }
+
+        Bundle extras = alert_msg_intent.getExtras();
+
+        if(extras!=null){
+            if(extras.containsKey("alert_messages")){
+                alert_messages = (HashMap<String, String>) alert_msg_intent.getSerializableExtra("alert_messages");
+                Toast.makeText(this, alert_messages.get("yellow"), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+        customiseMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CustomiseMessageActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +158,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SendMessageActivity.class);
+                if(!alert_messages.isEmpty()){
+                    intent.putExtra("alert_messages", alert_messages);
+                }
                 intent.putExtra("alert", "Yellow");
                 startActivity(intent);
                 finish();
@@ -137,6 +171,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SendMessageActivity.class);
+                if(!alert_messages.isEmpty()){
+                    intent.putExtra("alert_messages", alert_messages);
+                }
                 intent.putExtra("alert", "Orange");
                 startActivity(intent);
                 finish();
@@ -147,6 +184,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SendMessageActivity.class);
+                if(!alert_messages.isEmpty()){
+                    intent.putExtra("alert_messages", alert_messages);
+                }
                 intent.putExtra("alert", "Red");
                 startActivity(intent);
                 finish();

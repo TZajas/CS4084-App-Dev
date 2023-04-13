@@ -30,6 +30,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -38,7 +39,10 @@ public class SendMessageActivity extends AppCompatActivity {
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
     private static final String TAG = "MainActivity";
 
-    private String userLocation;
+    private HashMap<String, String> alert_messages;
+
+    String red_msg, orange_msg, yellow_msg, alert_colour, alert_message, user_location;
+
     private Button cancelAlertBtn;
     private TextView timer;
     private TextView countdownMessage;
@@ -57,7 +61,22 @@ public class SendMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_message);
 
         Bundle extras = getIntent().getExtras();
-        String alert_colour = extras.getString("alert");
+        alert_colour = extras.getString("alert");
+
+        alert_messages = new HashMap<String, String>();
+
+        red_msg = "RED ALERT";
+        orange_msg = "ORANGE ALERT";
+        yellow_msg = "YELLOW ALERT";
+
+        if(extras.containsKey("alert_messages")){
+            alert_messages = (HashMap<String, String>) extras.getSerializable("alert_messages");
+        }
+
+        if(!alert_messages.isEmpty()){
+            customiseMessage();
+            Toast.makeText(this, yellow_msg, Toast.LENGTH_SHORT).show();
+        }
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -96,7 +115,7 @@ public class SendMessageActivity extends AppCompatActivity {
                 cancelAlertBtn.setVisibility(View.GONE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-                        sendMessage(alert_colour, contacts);
+                        sendMessage(contacts);
                     } else {
                         requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 1);
                     }
@@ -138,7 +157,7 @@ public class SendMessageActivity extends AppCompatActivity {
                         double latitude = location.getLatitude();
                         double longitude = location.getLongitude();
                         Log.d(TAG, "Latitude: " + latitude + ", Longitude: " + longitude);
-                        userLocation = "Latitude: " + latitude + ", Longitude: " + longitude;
+                        user_location = "My Location: " + "https://www.google.com/maps/place/@"+longitude+","+latitude;
                     } else {
                         Log.e(TAG, "Location is null");
                     }
@@ -193,19 +212,22 @@ public class SendMessageActivity extends AppCompatActivity {
         return result;
     }
 
-    public void sendMessage(String alert_colour, ArrayList<String> contacts) {
-        String alert_message;
-
-        if (alert_colour == "Red") {
-            alert_message = "Red";
-        } else if (alert_colour == "Orange") {
-            alert_message = "Orange";
+    public void sendMessage(ArrayList<String> contacts) {
+        if (alert_colour.equals("Red")) {
+            alert_message = red_msg;
+        } else if (alert_colour.equals("Orange")) {
+            alert_message = orange_msg;
         } else {
-            alert_message = "Yellow";
+            alert_message = yellow_msg;
         }
 
+        alert_message = alert_message + " " + user_location;
+
+
+
         countdownMessage.setText(alert_colour + " Alert Sent!");
-        Toast.makeText(this, userLocation, Toast.LENGTH_LONG).show();
+
+        Toast.makeText(this, alert_message, Toast.LENGTH_SHORT).show();
         for (String num : contacts) {
             try {
                 SmsManager smsManager = SmsManager.getDefault();
@@ -214,6 +236,16 @@ public class SendMessageActivity extends AppCompatActivity {
                 e.printStackTrace();
                 Toast.makeText(this, "Error, message did not send", Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    public void customiseMessage() {
+        for (Map.Entry<String, String> entry : alert_messages.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if (key.equals("yellow")) yellow_msg = value;
+            if (key.equals("orange")) orange_msg = value;
+            if (key.equals("red")) red_msg = value;
         }
     }
 }

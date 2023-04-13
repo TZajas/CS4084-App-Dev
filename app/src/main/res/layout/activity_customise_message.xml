@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CustomiseMessageActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/background"
+    android:padding="30dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Alert Message"
+        android:fontFamily="@font/slab"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginBottom="30dp"
+        />
+
+    <Button
+        android:id="@+id/yellow_message_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="yellow alert message"
+        android:backgroundTint="@color/yellowbtn"
+        android:textStyle="bold"
+
+        android:fontFamily="@font/slab"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/edit_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Edit Yellow Alert Message"
+        android:fontFamily="@font/slab"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/orange_message_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="orange alert message"
+        android:backgroundTint="@color/orangebtn"
+        android:textStyle="bold"
+        android:fontFamily="@font/slab"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/edit_orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Edit Orange Alert Message"
+        android:fontFamily="@font/slab"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/red_message_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="red alert message"
+        android:backgroundTint="@color/redbtn"
+        android:textStyle="bold"
+        android:fontFamily="@font/slab"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/edit_red"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Edit Red Alert Message"
+        android:fontFamily="@font/slab"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible"
+        />
+
+    <Button
+        android:id="@+id/save_exit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save and Exit"
+        android:backgroundTint="@color/button"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        />
+
+
+</LinearLayout>
