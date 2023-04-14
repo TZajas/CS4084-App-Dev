@@ -22,11 +22,8 @@ import java.util.Map;
 
 public class AddContactActivity extends AppCompatActivity {
     private String email;
-
     private TextView cancel_btn;
-
     private Button addContactButton;
-
     private static final int PICK_CONTACT_REQUEST = 1;
 
     @Override
@@ -39,6 +36,9 @@ public class AddContactActivity extends AppCompatActivity {
 
         cancel_btn = findViewById(R.id.cancel_button);
 
+        /**
+         * Kills activity and
+         */
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +56,12 @@ public class AddContactActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Enables access and choosing of contacts from phones contact list
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -78,6 +84,12 @@ public class AddContactActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Add number chosen from contacts to firebase firestore user contacts
+     * @param email
+     * @param name
+     * @param number
+     */
     public void addNumber(String email, String name, String number){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

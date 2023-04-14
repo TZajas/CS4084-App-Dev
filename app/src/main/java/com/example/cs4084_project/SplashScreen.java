@@ -13,6 +13,9 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        /**
+         * Creates a splash screen that loads before the home activity for approx 4 seconds
+         */
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -20,6 +23,5 @@ public class SplashScreen extends AppCompatActivity {
                 finish();
             }
         },4000);
-
     }
 }

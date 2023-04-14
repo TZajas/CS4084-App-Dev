@@ -18,17 +18,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-
 public class HomeActivity extends AppCompatActivity {
 
-    Button yellowAlert, orangeAlert, redAlert, addContact, viewContacts, customiseMessage, maps, logoutButton, safetyTips;
-    ImageButton userDetails;
-    FirebaseAuth auth;
-    FirebaseUser user;
-    FirebaseFirestore db;
-
-    String[] permissions= new String[] {
+    private Button yellowAlert, orangeAlert, redAlert, addContact, viewContacts, customiseMessage, maps, logoutButton, safetyTips;
+    private ImageButton userDetails;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    private FirebaseFirestore db;
+    private String[] permissions= new String[] {
             Manifest.permission.SEND_SMS,
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.READ_CONTACTS

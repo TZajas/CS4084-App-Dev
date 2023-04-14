@@ -8,8 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class SafetyTipsActivity extends AppCompatActivity {
-
-    Button return_btn;
+    private Button return_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

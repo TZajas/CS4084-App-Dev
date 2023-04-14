@@ -19,12 +19,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    TextInputEditText editTextEmail, editTextPassword;
-    Button buttonReg;
-    FirebaseAuth mAuth;
-
-    TextView loginPageButton;
+    private TextInputEditText editTextEmail, editTextPassword;
+    private Button buttonReg;
+    private FirebaseAuth mAuth;
+    private TextView loginPageButton;
 
     @Override
     public void onStart() {

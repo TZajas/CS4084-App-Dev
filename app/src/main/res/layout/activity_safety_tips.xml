@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:text="Safety Tips"
         android:fontFamily="@font/slab"
         android:layout_marginBottom="10dp"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="@string/safety_tips"
         android:fontFamily="@font/slab"
-        android:textSize="20dp"
+        android:textSize="18sp"
         android:layout_marginBottom="10dp"
         />
 
@@ -34,7 +34,7 @@
         android:backgroundTint="@color/button"
         android:text="Return"
         android:fontFamily="@font/slab"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         />
 

@@ -1,15 +1,10 @@
 package com.example.cs4084_project;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,39 +19,28 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ViewContactsActivity extends AppCompatActivity {
-    ListView contact_list;
-    FirebaseFirestore db;
-    DocumentReference doc;
-
-    FirebaseUser user;
-
-    FirebaseAuth auth;
-
-    ArrayList<String> arrayList;
-    ArrayList<String> contactNumbers;
-    ArrayAdapter<String> adapter;
-
-    String selected_name="";
-
-    Button back_btn;
-
-    Button delete_contact_btn;
-
-    TextView select_contact_textview, no_contacts;
+    private ListView contact_list;
+    private FirebaseFirestore db;
+    private DocumentReference doc;
+    private FirebaseUser user;
+    private FirebaseAuth auth;
+    private ArrayList<String> arrayList;
+    private ArrayList<String> contactNumbers;
+    private ArrayAdapter<String> adapter;
+    private String selected_name="";
+    private Button back_btn;
+    private Button delete_contact_btn;
+    private TextView select_contact_textview, no_contacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +69,10 @@ public class ViewContactsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         doc = db.collection("userContacts").document(user.getEmail());
 
+        /**
+         * Retrieves contacts from firestore database if they have previously been added
+         * if not it displays warning message
+         */
         doc.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -116,6 +104,10 @@ public class ViewContactsActivity extends AppCompatActivity {
                     }
                 });
 
+        /**
+         * When a list view item is clicked the variable selected_name os set depending
+         * on if a name is single or double
+         */
         contact_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -133,6 +125,9 @@ public class ViewContactsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Returns user to home page
+         */
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,6 +137,9 @@ public class ViewContactsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Deletes contact that has previously been selected from list view
+         */
         delete_contact_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

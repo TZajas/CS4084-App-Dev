@@ -31,26 +31,17 @@ import java.util.Locale;
 import java.util.Map;
 
 public class UserDetailsActivity extends AppCompatActivity {
-
     final private Calendar myCalendar= Calendar.getInstance();
     private EditText name,height,weight,dob,phone;
     private Button save_btn;
     private Button cancel_btn;
-
     private ListView user_details_list;
-
     private ArrayList<String> arrayList;
-
     private ArrayAdapter<String> adapter;
-
     private FirebaseAuth auth;
-
     private FirebaseUser user;
-
     private FirebaseFirestore db;
-
     private DocumentReference doc;
-
     private CollectionReference userDetails;
 
     @Override
@@ -81,6 +72,9 @@ public class UserDetailsActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.listview_modify_layout, arrayList);
         user_details_list.setAdapter(adapter);
 
+        /**
+         * Creates date picker object when date of birth field is clicked
+         */
         DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -97,6 +91,9 @@ public class UserDetailsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Retrieves user details from database if they have been previously set
+         */
         doc.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -118,6 +115,9 @@ public class UserDetailsActivity extends AppCompatActivity {
                     }
                 });
 
+        /**
+         * Saves user details to firestore database
+         */
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +161,9 @@ public class UserDetailsActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Returns user to home activity
+         */
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,6 +174,9 @@ public class UserDetailsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates date of birth field with specified format
+     */
     private void updateLabel() {
         String myFormat="dd/MM/yyyy";
         SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.UK);

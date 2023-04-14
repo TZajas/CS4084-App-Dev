@@ -15,8 +15,8 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
-    MapView mapView;
-    GoogleMap mGoogleMap;
+    private MapView mapView;
+    private GoogleMap mGoogleMap;
 
     @SuppressLint("MissingInflatedId")
     @Override

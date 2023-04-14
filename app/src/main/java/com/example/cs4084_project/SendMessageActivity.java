@@ -30,16 +30,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
-
 public class SendMessageActivity extends AppCompatActivity {
-
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
     private static final String TAG = "MainActivity";
-    String red_msg, orange_msg, yellow_msg, alert_colour, alert_message, user_location;
+    private String red_msg, orange_msg, yellow_msg, alert_colour, alert_message, user_location;
     private Button cancelAlertBtn;
     private TextView timer;
     private TextView countdownMessage;
@@ -82,6 +78,9 @@ public class SendMessageActivity extends AppCompatActivity {
 
         requestLocationPermission();
 
+        /**
+         * calls cancelAlert Function
+         */
         cancelAlertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,12 +88,18 @@ public class SendMessageActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * A countdown timer that waits 5 seconds before sending alert message
+         */
         countDownTimer = new CountDownTimer(6000, 600) {
             @Override
             public void onTick(long l) {
                 timer.setText(String.valueOf(l / 1000));
             }
 
+            /**
+             *
+             */
             @Override
             public void onFinish() {
                 timer.setVisibility(View.GONE);

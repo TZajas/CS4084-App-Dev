@@ -10,30 +10,21 @@ import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 public class CustomiseMessageActivity extends AppCompatActivity {
-
-    Button red_btn, yellow_btn, orange_btn, save_exit_btn;
-    Map<String, String> alert_messages;
-
-    EditText red_edit, orange_edit, yellow_edit;
-
-    FirebaseFirestore db;
-
-    DocumentReference doc;
-
-    FirebaseAuth auth;
-
-    FirebaseUser user;
+    private Button red_btn, yellow_btn, orange_btn, save_exit_btn;
+    private Map<String, String> alert_messages;
+    private EditText red_edit, orange_edit, yellow_edit;
+    private FirebaseFirestore db;
+    private DocumentReference doc;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
