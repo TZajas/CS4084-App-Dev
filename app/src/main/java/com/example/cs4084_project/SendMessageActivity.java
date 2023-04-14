@@ -98,7 +98,7 @@ public class SendMessageActivity extends AppCompatActivity {
             }
 
             /**
-             *
+             * Sends alert message when timer is finished
              */
             @Override
             public void onFinish() {
@@ -124,6 +124,10 @@ public class SendMessageActivity extends AppCompatActivity {
         }.start();
     }
 
+
+    /**
+     * Cancels timer and returns user to home page
+     */
     private void cancelAlert() {
         countDownTimer.cancel();
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -131,7 +135,11 @@ public class SendMessageActivity extends AppCompatActivity {
         finish();
     }
 
-
+    /**
+     * Takes an array of previosuly added contacts from database and uses the smsManager API
+     * to send a customised messsage to each contact
+     * @param contacts
+     */
     public void sendMessage(ArrayList<String> contacts) {
 
         if (alert_colour.equals("Red")) {
@@ -159,6 +167,9 @@ public class SendMessageActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Fetches the customised messages from database if they are set and modifies the message variables
+     */
     public void customiseMessage() {
         custom_message_doc.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -216,6 +227,16 @@ public class SendMessageActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Checks if location permission has been granted
+     * @param requestCode The request code passed in
+     * android.app.Activity, String[], int)}
+     * @param permissions The requested permissions. Never null.
+     * @param grantResults The grant results for the corresponding permissions
+     *     which is either {@link android.content.pm.PackageManager#PERMISSION_GRANTED}
+     *     or {@link android.content.pm.PackageManager#PERMISSION_DENIED}. Never null.
+     *
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -233,6 +254,11 @@ public class SendMessageActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Fetches contacts that user has previously added from database and returns an array with those contacts
+     * @return contact list
+     */
     public ArrayList<String> getContacts() {
         ArrayList<String> result = new ArrayList<>();
         doc.get()

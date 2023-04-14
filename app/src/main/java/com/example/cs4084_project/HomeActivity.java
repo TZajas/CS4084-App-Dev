@@ -71,6 +71,9 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         }
 
+        /**
+         * Starts safety tips activity
+         */
         safetyTips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +83,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
+        /**
+         * Starts customise message activity
+         */
         customiseMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +96,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Starts maps activity
+         */
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +108,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
+        /**
+         * Logs out user
+         */
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +122,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Starts view contacts activity
+         */
         viewContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +134,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Starts user details activity
+         */
         userDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,6 +146,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Starts add contact activity
+         */
         addContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +159,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Starts yellow alert activity
+         */
         yellowAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,6 +172,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Starts orange alert activity
+         */
         orangeAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,6 +185,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Starts red alert activity
+         */
         redAlert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,6 +200,12 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This functions checks permissions have been displayed previously
+     * @param context
+     * @param PERMISSIONS
+     * @return
+     */
     private boolean hasPermissions(Context context, String... PERMISSIONS) {
 
         if (context != null && PERMISSIONS != null) {
@@ -183,6 +221,16 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Checks which permissions were granted and which were declined
+     * @param requestCode The request code passed in
+     * android.app.Activity, String[], int)}
+     * @param permissions The requested permissions. Never null.
+     * @param grantResults The grant results for the corresponding permissions
+     *     which is either {@link android.content.pm.PackageManager#PERMISSION_GRANTED}
+     *     or {@link android.content.pm.PackageManager#PERMISSION_DENIED}. Never null.
+     *
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

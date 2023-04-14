@@ -10,6 +10,9 @@ import android.widget.Button;
 public class SafetyTipsActivity extends AppCompatActivity {
     private Button return_btn;
 
+    /**
+     * Displays safety tips
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
