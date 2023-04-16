@@ -40,7 +40,7 @@ public class AddContactActivity extends AppCompatActivity {
         cancel_btn = findViewById(R.id.cancel_button);
 
         /**
-         * Kills activity and
+         * Kills activity and sends user back to home page
          */
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
