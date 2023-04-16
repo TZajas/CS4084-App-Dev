@@ -45,6 +45,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     //method that checks whether permission is granted, which is called when you first launch the app. 
+    // @param requestCode The request code passed in
+    // android.app.Activity, String[], int)}
+    // @param permissions The requested permissions. Never null.
+    // @param grantResults The grant results for the corresponding permissions
+    //     which is either {@link android.content.pm.PackageManager#PERMISSION_GRANTED}
+    //     or {@link android.content.pm.PackageManager#PERMISSION_DENIED}. Never null.
+     
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -55,6 +62,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 } else {
                     // the feature requires a permission that the user has denied.
+                    Log.e(TAG, "Location permissions denied");
                 }
                 return;
         }
