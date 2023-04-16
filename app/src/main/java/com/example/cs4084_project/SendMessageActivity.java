@@ -1,3 +1,5 @@
+//Created By Tomasz Zajas: 20278748
+//and Dennis Kolomiyets:
 package com.example.cs4084_project;
 
 import androidx.annotation.NonNull;
