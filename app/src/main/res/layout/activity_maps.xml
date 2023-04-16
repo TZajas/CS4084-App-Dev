@@ -21,8 +21,12 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Return"
+        android:backgroundTint="@color/button"
+        android:fontFamily="@font/slab"
+        android:textSize="15dp"
         tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="38dp" />
+        tools:layout_editor_absoluteY="38dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
