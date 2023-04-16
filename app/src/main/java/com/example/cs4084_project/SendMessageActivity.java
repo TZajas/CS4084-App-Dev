@@ -197,7 +197,9 @@ public class SendMessageActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    
+    
+    //method for asking for permission to access users location
     private void requestLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_LOCATION);
@@ -207,7 +209,9 @@ public class SendMessageActivity extends AppCompatActivity {
     }
 
     private void getLocation() {
-        // Get the device's current location
+        // Get the device's current location using LocationServices listener
+        // on success gets the latitude and longitude
+        // latitude and longitude are then stored in user_location which is a  link that will be sent to contacts and can be access by them to provide the location
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationServices.getFusedLocationProviderClient(this).getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
