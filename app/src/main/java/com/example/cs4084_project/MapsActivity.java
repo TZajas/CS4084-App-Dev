@@ -17,29 +17,34 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private MapView mapView;
     private GoogleMap mGoogleMap;
+    Button backBtn;
 
     @SuppressLint("MissingInflatedId")
     @Override
+    //on creation the following code allows the map to be displayed
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        mapView = findViewById(R.id.map_view);
+        mapView = findViewById(R.id.map_view); //map
+        backBtn = findViewById(R.id.backButton); //back button
 
-
+        
         mapView.getMapAsync(this);
         mapView.onCreate(savedInstanceState);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PERMISSION_GRANTED) {
-        } else {
-            this.requestPermissions(new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION
-            }, PERMISSION_GRANTED);
-        }
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mapView.onDestroy();
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        
     }
 
-
+    //method that checks whether permission is granted, which is called when you first launch the app. 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -49,11 +54,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (grantResults.length > 0 &&
                         grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 } else {
-                    // Explain to the user that the feature is unavailable because
                     // the feature requires a permission that the user has denied.
-                    // At the same time, respect the user's decision. Don't link to
-                    // system settings in an effort to convince the user to change
-                    // their decision.
                 }
                 return;
         }
