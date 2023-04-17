@@ -71,6 +71,9 @@ public class CustomiseMessageActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * Saves customised message (if there was any) in database and returns to home page
+         */
         save_exit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

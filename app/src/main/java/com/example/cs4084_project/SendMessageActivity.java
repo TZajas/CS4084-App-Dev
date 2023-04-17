@@ -54,6 +54,7 @@ public class SendMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_message);
 
+        //retrieving intent containing colour of alert
         Bundle extras = getIntent().getExtras();
         alert_colour = extras.getString("alert");
 
@@ -144,6 +145,7 @@ public class SendMessageActivity extends AppCompatActivity {
      */
     public void sendMessage(ArrayList<String> contacts) {
 
+        //check to see which colour of alert
         if (alert_colour.equals("Red")) {
             alert_message = red_msg;
         } else if (alert_colour.equals("Orange")) {
@@ -152,6 +154,7 @@ public class SendMessageActivity extends AppCompatActivity {
             alert_message = yellow_msg;
         }
 
+        //adds location link to alert message
         alert_message = alert_message + " " + user_location;
 
         countdownMessage.setText(alert_colour + " Alert Sent!");

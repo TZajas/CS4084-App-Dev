@@ -59,6 +59,8 @@ public class ViewContactsActivity extends AppCompatActivity {
         contactNumbers = new ArrayList<>();
 
         arrayList = new ArrayList<>();
+
+        //modifies appearance of listview and displays contacts
         adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.listview_modify_layout, arrayList);
 
         contact_list = findViewById(R.id.contact_list);
@@ -82,6 +84,7 @@ public class ViewContactsActivity extends AppCompatActivity {
                             Map<String, Object> numbers = documentSnapshot.getData();
 
                             if(numbers.isEmpty()){
+                                //validation to check if contacts have been added
                                 no_contacts.setVisibility(View.VISIBLE);
                             }
 
@@ -106,13 +109,14 @@ public class ViewContactsActivity extends AppCompatActivity {
                 });
 
         /**
-         * When a list view item is clicked the variable selected_name os set depending
+         * When a list view item is clicked the variable selected_name is set depending
          * on if a name is single or double
          */
         contact_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String contact = adapterView.getItemAtPosition(i).toString();
+                //checks if name is single or two words
                 String[] split = contact.split(" ");
 
                 if(split.length > 2){
@@ -145,6 +149,7 @@ public class ViewContactsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //Accessing firestore to delete contact by searching for key with matching name
                 Map<String,Object> updates = new HashMap<>();
                 updates.put(selected_name, FieldValue.delete());
                 Toast.makeText(ViewContactsActivity.this, "Deleted: " + selected_name, Toast.LENGTH_SHORT).show();
