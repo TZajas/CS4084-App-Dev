@@ -86,6 +86,7 @@ public class CustomiseMessageActivity extends AppCompatActivity {
                     alert_messages.put("red", red_edit.getText().toString());
                 }
 
+                //updates database with new messages
                 if(!alert_messages.isEmpty()){
                     doc.set(alert_messages, SetOptions.merge());
                 }
