@@ -87,6 +87,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap = googleMap;
         mGoogleMap.setMyLocationEnabled(true);
         
+        //Set location and name for security marker
         LatLng security = new LatLng(52.673355392017655, -8.567490135746874);
         mGoogleMap.addMarker(new MarkerOptions().position(security).title("UL Security"));
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(security));
