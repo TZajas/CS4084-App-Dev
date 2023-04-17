@@ -17,6 +17,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -82,6 +86,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mGoogleMap = googleMap;
         mGoogleMap.setMyLocationEnabled(true);
+        
+        LatLng security = new LatLng(52.673355392017655, -8.567490135746874);
+        mGoogleMap.addMarker(new MarkerOptions().position(security).title("UL Security"));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(security));
 
     }
 
