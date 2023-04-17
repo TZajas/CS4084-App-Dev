@@ -22,7 +22,25 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/safety_tips"
+        android:text="@string/safety_tip_1"
+        android:fontFamily="@font/slab"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/safety_tip_2"
+        android:fontFamily="@font/slab"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/safety_tip_3"
         android:fontFamily="@font/slab"
         android:textSize="16sp"
         android:layout_marginBottom="10dp"
